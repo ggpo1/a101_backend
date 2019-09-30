@@ -18,6 +18,8 @@ namespace a101_backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+
         }
 
         public IConfiguration Configuration { get; }
@@ -25,6 +27,18 @@ namespace a101_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Services Registrations
+            /*
+            services.AddScoped<IApartmentService, ApartmentService>(); // apartments service
+            services.AddScoped<IUserService, UserService>(); // users service
+            services.AddScoped<IRoomService, RoomService>(); // rooms service
+            services.AddScoped<IFStorageService, FStorageService>(); // fstorages service
+            services.AddScoped<IFStorageStillageService, FStorageStillageService>(); // fstoragestillages sevice
+            services.AddScoped<IAuthService, AuthService>(); // auth service
+            services.AddScoped<IFSSTypeService, FSSTypeService>(); // stillage types service
+            services.AddScoped<IProductService, ProductService>();
+            */
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
