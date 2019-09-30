@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using a101_backend.Services.AuthService;
+using a101_backend.Services.CompanyService;
+
 namespace a101_backend
 {
     public class Startup
@@ -38,6 +41,11 @@ namespace a101_backend
             services.AddScoped<IFSSTypeService, FSSTypeService>(); // stillage types service
             services.AddScoped<IProductService, ProductService>();
             */
+
+            // Резервирование сервиса авторизации
+            services.AddScoped<IAuthService, AuthService>();
+            // Резервирование сервиса компаний
+            services.AddScoped<ICompanyService, CompanyService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

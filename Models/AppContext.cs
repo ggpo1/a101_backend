@@ -11,6 +11,7 @@ namespace a101_backend.Models
     public class AppContext : DbContext
     {
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
