@@ -6,6 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\**" />
+    <Content Remove="Service\**" />
+    <EmbeddedResource Remove="Service\**" />
+    <None Remove="Service\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191002145606_new123.cs" />
+    <Compile Remove="Migrations\20191002145606_new123.Designer.cs" />
+    <Compile Remove="Migrations\20191002151513_add123.cs" />
+    <Compile Remove="Migrations\20191002151513_add123.Designer.cs" />
+    <Compile Remove="Migrations\20191002151622_add123123.cs" />
+    <Compile Remove="Migrations\20191002151622_add123123.Designer.cs" />
+    <Compile Remove="Migrations\20191002151822_add123123123.cs" />
+    <Compile Remove="Migrations\20191002151822_add123123123.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
@@ -13,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Models\DTO\" />
-    <Folder Include="Service\" />
   </ItemGroup>
 
 </Project>

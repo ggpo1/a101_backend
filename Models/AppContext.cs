@@ -10,8 +10,10 @@ namespace a101_backend.Models
 {
     public class AppContext : DbContext
     {
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<PartnerInfo> PartnerInfo { get; set; }
+        public virtual DbSet<City> City { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +24,7 @@ namespace a101_backend.Models
             .AddJsonFile("appsettings.json")
             .Build();
 
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("job_db"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("prod_db"));
         }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using a101_backend.Models;
 
 namespace a101_backend.Migrations
 {
     [DbContext(typeof(Models.AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20191002134827_CompanyName")]
+    partial class CompanyName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,7 @@ namespace a101_backend.Migrations
 
                     b.HasKey("CityID");
 
-                    b.ToTable("City");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("a101_backend.Models.DataBase.Company", b =>
@@ -38,23 +40,15 @@ namespace a101_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CityID");
-
                     b.Property<string>("CompanyName");
 
-                    b.Property<string>("ContactPersonFullName");
-
-                    b.Property<string>("ContactPersonPhoneNumber");
-
-                    b.Property<int>("PartnerInfoID");
+                    b.Property<int>("UserID");
 
                     b.HasKey("CompanyID");
 
-                    b.HasIndex("CityID");
+                    b.HasIndex("UserID");
 
-                    b.HasIndex("PartnerInfoID");
-
-                    b.ToTable("Company");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("a101_backend.Models.DataBase.PartnerInfo", b =>
@@ -63,7 +57,9 @@ namespace a101_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CityID");
+                    b.Property<string>("CityID");
+
+                    b.Property<int?>("CityID1");
 
                     b.Property<string>("CompanyName");
 
@@ -73,15 +69,17 @@ namespace a101_backend.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int?>("UserID");
+                    b.Property<string>("UserID");
+
+                    b.Property<int?>("UserID1");
 
                     b.HasKey("PartnerInfoID");
 
-                    b.HasIndex("CityID");
+                    b.HasIndex("CityID1");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserID1");
 
-                    b.ToTable("PartnerInfo");
+                    b.ToTable("PartnerInfos");
                 });
 
             modelBuilder.Entity("a101_backend.Models.DataBase.User", b =>
@@ -98,19 +96,14 @@ namespace a101_backend.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("a101_backend.Models.DataBase.Company", b =>
                 {
-                    b.HasOne("a101_backend.Models.DataBase.City", "City")
+                    b.HasOne("a101_backend.Models.DataBase.User", "User")
                         .WithMany()
-                        .HasForeignKey("CityID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("a101_backend.Models.DataBase.PartnerInfo", "PartnerInfo")
-                        .WithMany()
-                        .HasForeignKey("PartnerInfoID")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -118,11 +111,11 @@ namespace a101_backend.Migrations
                 {
                     b.HasOne("a101_backend.Models.DataBase.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityID");
+                        .HasForeignKey("CityID1");
 
                     b.HasOne("a101_backend.Models.DataBase.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID1");
                 });
 #pragma warning restore 612, 618
         }

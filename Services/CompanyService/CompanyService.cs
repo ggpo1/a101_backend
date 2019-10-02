@@ -11,7 +11,7 @@ namespace a101_backend.Services.CompanyService
     {
         public async Task<List<Company>> GetPartnerCompanies(int userID)
         {
-            List<Company> comp = MyDb.db.Companies.Where(elem => elem.UserID == userID).ToList();
+            List<Company> comp = MyDb.db.Company.Where(elem => elem.PartnerInfo.PartnerInfoID == userID).ToList();
             return await Task.Run(() => comp);
         }
     }

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 using a101_backend.Services.AuthService;
 using a101_backend.Services.CompanyService;
+using a101_backend.Services.PartnerInfoService;
 
 namespace a101_backend
 {
@@ -46,6 +47,8 @@ namespace a101_backend
             services.AddScoped<IAuthService, AuthService>();
             // Резервирование сервиса компаний
             services.AddScoped<ICompanyService, CompanyService>();
+            // Резервирование сервиса информации о партнере
+            services.AddScoped<IPartnerInfoService, PartnerInfoService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
