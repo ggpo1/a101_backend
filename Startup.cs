@@ -14,6 +14,9 @@ using Microsoft.Extensions.Options;
 using a101_backend.Services.AuthService;
 using a101_backend.Services.CompanyService;
 using a101_backend.Services.PartnerInfoService;
+using a101_backend.Services.UserService;
+using a101_backend.Services.CityService;
+using a101_backend.Services.DocumentService;
 
 namespace a101_backend
 {
@@ -22,10 +25,9 @@ namespace a101_backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-
+            
         }
-
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -43,12 +45,36 @@ namespace a101_backend
             services.AddScoped<IProductService, ProductService>();
             */
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins(
+                        "http://localhost:8080", 
+                        "http://192.168.50.8:10101", 
+                        "http://192.168.50.8",
+                        "http://localhost:8081",
+                        "http://192.168.50.8:11111"
+                        );
+                    builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+                });
+            });
+
             // Резервирование сервиса авторизации
             services.AddScoped<IAuthService, AuthService>();
             // Резервирование сервиса компаний
             services.AddScoped<ICompanyService, CompanyService>();
             // Резервирование сервиса информации о партнере
             services.AddScoped<IPartnerInfoService, PartnerInfoService>();
+            // Резервирование сервиса юзеров
+            services.AddScoped<IUserService, UserService>();
+            // Резервирование сервиса городов
+            services.AddScoped<ICityService, CityService>();
+            // Резервирование сервиса документов
+            services.AddScoped<IDocumentService, DocumentService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -65,6 +91,8 @@ namespace a101_backend
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
             app.UseMvc();

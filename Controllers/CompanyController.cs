@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using a101_backend.Services.CompanyService;
 using a101_backend.Models.DataBase;
+using a101_backend.Models.DTO;
 
 namespace a101_backend.Controllers
 {
@@ -18,6 +19,18 @@ namespace a101_backend.Controllers
         public CompanyController(ICompanyService service) 
         {
             this.service = service;
+        }
+
+        [HttpGet]
+        public async Task<List<CompaniesListingDTO>> GetCompanies()
+        {
+            return await service.GetCompanies();
+        }
+
+        [HttpPost]
+        public async Task<object> AddNewCompany([FromBody] Company company)
+        {
+            return await service.AddNewCompany(company);
         }
 
         [HttpGet]

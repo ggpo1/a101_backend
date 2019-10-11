@@ -1,4 +1,5 @@
 ﻿using a101_backend.Models.DataBase;
+using a101_backend.Models.DTO;
 using a101_backend.Services.PartnerInfoService;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,5 +26,23 @@ namespace a101_backend.Controllers
             return await service.GetPartnerInfoByUserID(userID);
         }
 
+        [HttpGet]
+        [Route("GetPartners")]
+        public async Task<List<GetAllPartnersDTO>> GetPartners()
+        {
+            return await service.GetPartners();
+        }
+
+        [HttpPost]
+        public async Task<object> AddNewPartner([FromBody] PartnerInfo newPartner)
+        {
+            return await service.AddNewPartner(newPartner);
+        }
+
+        [HttpDelete]
+        public async Task<PartnerInfo> DeletePartner(int partnerInfoID)
+        {
+            return await service.DeletePartner(partnerInfoID);
+        }
     }
 }

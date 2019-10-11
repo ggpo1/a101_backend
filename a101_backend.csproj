@@ -21,16 +21,18 @@
     <Compile Remove="Migrations\20191002151622_add123123.Designer.cs" />
     <Compile Remove="Migrations\20191002151822_add123123123.cs" />
     <Compile Remove="Migrations\20191002151822_add123123123.Designer.cs" />
+    <Compile Remove="Migrations\20191004102746_add123123123123.cs" />
+    <Compile Remove="Migrations\20191004102746_add123123123123.Designer.cs" />
+    <Compile Remove="Migrations\20191004102907_newPartner.cs" />
+    <Compile Remove="Migrations\20191004102907_newPartner.Designer.cs" />
+    <Compile Remove="Migrations\20191004103304_newPartnere.cs" />
+    <Compile Remove="Migrations\20191004103304_newPartnere.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\DTO\" />
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,7 @@ namespace a101_backend.Models
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<PartnerInfo> PartnerInfo { get; set; }
         public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<Document> Document { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
