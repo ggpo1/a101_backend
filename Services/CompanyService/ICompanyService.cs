@@ -11,5 +11,7 @@ namespace a101_backend.Services.CompanyService
         Task<List<Company>> GetPartnerCompanies(int userID);
         Task<List<CompaniesListingDTO>> GetCompanies();
         Task<object> AddNewCompany(Company company);
+        Task<object> RemoveCompany(int companyID);
+        Task<object> UpdateCompany(Company company);
     }
 }

@@ -15,5 +15,6 @@ namespace a101_backend.Services.DocumentService
         Task<List<Document>> GetDocs();
         Task<Document> GetDocByID(int docID);
         Task<Document> SaveDocInfo(Document document); 
+        Task<object> RemoveDocumentInfo(int companyID);
     }
 }

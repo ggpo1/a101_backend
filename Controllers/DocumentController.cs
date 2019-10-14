@@ -91,6 +91,13 @@ namespace a101_backend.Controllers
             return File(memory, GetContentType(path), Path.GetFileName(path));
         }
 
+        [HttpDelete]
+        [Route("{companyID}")]
+        public async Task<object> RemoveDocumentInfo(int companyID)
+        {
+            return await service.RemoveDocumentInfo(companyID);
+        }
+
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();

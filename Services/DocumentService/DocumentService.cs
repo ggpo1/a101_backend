@@ -33,6 +33,29 @@ namespace a101_backend.Services.DocumentService
             return await Task.Run(() => MyDb.db.Document.Where(elem => elem.PartnerInfoID == partnerID).ToList());
         }
 
+        public async Task<object> RemoveDocumentInfo(int companyID)
+        {
+            var deleting = MyDb.db.Document.FirstOrDefault(elem => elem.CompanyID == companyID);
+            if (deleting != null)
+            {
+                try
+                {
+                    MyDb.db.Document.Remove(deleting);
+                    MyDb.db.SaveChanges();
+                    return await Task.Run(() => (object)new { status = true });
+                }
+                catch (Exception)
+                {
+                    return await Task.Run(() => (object)new { status = false });
+                }
+
+            }
+            else
+            {
+                return await Task.Run(() => (object)new { status = false });
+            }
+        }
+
         public async Task<Document> SaveDocInfo(Document document)
         {
             var savedDoc = MyDb.db.Document.Add(document);

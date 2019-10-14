@@ -16,7 +16,7 @@ namespace a101_backend.Controllers
     {
         ICompanyService service;
 
-        public CompanyController(ICompanyService service) 
+        public CompanyController(ICompanyService service)
         {
             this.service = service;
         }
@@ -31,6 +31,19 @@ namespace a101_backend.Controllers
         public async Task<object> AddNewCompany([FromBody] Company company)
         {
             return await service.AddNewCompany(company);
+        }
+
+        [HttpDelete]
+        [Route("{companyID}")]
+        public async Task<object> RemoveCompany(int companyID)
+        {
+            return await service.RemoveCompany(companyID);
+        }
+
+        [HttpPatch]
+        public async Task<object> UpdateCompany([FromBody] Company company)
+        {
+            return await service.UpdateCompany(company);
         }
 
         [HttpGet]
