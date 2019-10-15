@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using a101_backend.Models;
 using a101_backend.Models.DataBase;
 using a101_backend.Models.DTO;
+using a101_backend.Models.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 
@@ -61,6 +62,22 @@ namespace a101_backend.Services.DocumentService
             var savedDoc = MyDb.db.Document.Add(document);
             MyDb.db.SaveChanges();
             return await Task.Run(() => savedDoc.Entity);
+        }
+
+        public async Task<object> UpdateDocumentStatus(int documentInfoID, DocumentStatus newStatus)
+        {
+            try
+            {
+                var documentToUpdate = MyDb.db.Document.FirstOrDefault(el => el.DocumentID == documentInfoID);
+                documentToUpdate.DocumentStatus = newStatus;
+                MyDb.db.Update(documentToUpdate);
+                MyDb.db.SaveChanges();
+                return await Task.Run(() => (object) new { status=true });
+            }
+            catch (Exception)
+            {
+                return await Task.Run(() => (object) new { status=false });
+            }
         }
     }
 }

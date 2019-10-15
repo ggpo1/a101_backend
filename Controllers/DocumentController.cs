@@ -1,4 +1,5 @@
 ﻿using a101_backend.Models.DataBase;
+using a101_backend.Models.Enums;
 using a101_backend.Services.DocumentService;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,11 @@ namespace a101_backend.Controllers
     [Route("api/[controller]")]
     public class DocumentController : Controller
     {
+
+        public class DocStatus {
+            public DocumentStatus status { get; set; }
+        }
+
         IDocumentService service;
 
         public DocumentController(IDocumentService service)
@@ -55,6 +61,15 @@ namespace a101_backend.Controllers
         {
             return await service.SaveDocInfo(document);
         }
+
+        [HttpPatch]
+        [Route("docstatus/{id}")]
+        public async Task<object> UpdateDocStatus(int id, [FromBody] DocStatus status)
+        {
+            return await service.UpdateDocumentStatus(id, status.status);
+        }
+
+
 
         [HttpPost, DisableRequestSizeLimit]
         public async Task<object> AddNewDocument([FromForm]IFormFile file)

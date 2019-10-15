@@ -1,5 +1,6 @@
 ﻿using a101_backend.Models.DataBase;
 using a101_backend.Models.DTO;
+using a101_backend.Models.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace a101_backend.Services.DocumentService
         Task<Document> GetDocByID(int docID);
         Task<Document> SaveDocInfo(Document document); 
         Task<object> RemoveDocumentInfo(int companyID);
+        Task<object> UpdateDocumentStatus(int documentInfoID, DocumentStatus newStatus);
     }
 }

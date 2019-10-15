@@ -68,8 +68,16 @@ namespace a101_backend.Services.CompanyService
         {
             try
             {
-                MyDb.db.Update(company);
                 var updated = MyDb.db.Company.FirstOrDefault(elem => elem.CompanyID == company.CompanyID);
+                updated.CompanyName = company.CompanyName;
+                updated.ContactPersonFullName = company.ContactPersonFullName;
+                updated.ContactPersonPhoneNumber = company.ContactPersonPhoneNumber;
+                updated.ContactPersonCompanyState = company.ContactPersonCompanyState;
+                updated.Status = company.Status;
+                updated.PartnerInfoID = company.PartnerInfoID;
+                updated.CityID = company.CityID;
+                MyDb.db.Update(updated);
+                MyDb.db.SaveChanges();
                 if (updated != null && updated == company) 
                     return await Task.Run(() => (object) new { status = true });
                 else
@@ -79,7 +87,6 @@ namespace a101_backend.Services.CompanyService
             {
                 return await Task.Run(() => (object) new { status = false });
             }
-            throw new NotImplementedException();
         }
     }
 }
