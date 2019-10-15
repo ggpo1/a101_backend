@@ -10,6 +10,25 @@ namespace a101_backend.Services.PartnerInfoService
 {
     public class PartnerInfoService : IPartnerInfoService
     {
+        public async Task<object> UpdatePartnerInfo(PartnerInfo partner)
+        {
+            try
+            {
+                var _updateTo = MyDb.db.PartnerInfo.FirstOrDefault(el => el.PartnerInfoID == partner.PartnerInfoID);
+                _updateTo.FullName = partner.FullName;
+                _updateTo.CompanyName = partner.CompanyName;
+                _updateTo.CompanyState = partner.CompanyState;
+                _updateTo.PhoneNumber = partner.PhoneNumber;
+                _updateTo.CityID = partner.CityID;
+                MyDb.db.Update(_updateTo);
+                MyDb.db.SaveChanges();
+                return await Task.Run(() => (object)new { status = true });
+            }
+            catch (Exception)
+            {
+                return await Task.Run(() => (object) new { status=false });
+            }
+        }
         public Task<object> AddNewPartner(PartnerInfo newPartner)
         {
             var added = MyDb.db.PartnerInfo.Add(newPartner);
@@ -51,9 +70,5 @@ namespace a101_backend.Services.PartnerInfoService
             return Task.Run(() => _partners);
         }
 
-        public Task<object> UpdatePartner()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -11,8 +11,8 @@ namespace a101_backend.Services.PartnerInfoService
     {
         Task<PartnerInfo> GetPartnerInfoByUserID(int userID);
         Task<List<GetAllPartnersDTO>> GetPartners();
-        Task<object> UpdatePartner();
         Task<object> AddNewPartner(PartnerInfo newPartner);
         Task<PartnerInfo> DeletePartner(int partnerInfoID);
+        Task<object> UpdatePartnerInfo(PartnerInfo partner);
     }
 }

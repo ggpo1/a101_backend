@@ -36,5 +36,11 @@ namespace a101_backend.Controllers
         {
             return await service.DeleteUser(userID);
         }
+
+        [HttpPatch]
+        public async Task<object> UpdateUser([FromBody] User user)
+        {
+            return await service.UpdateUser(user);
+        }
     }
 }

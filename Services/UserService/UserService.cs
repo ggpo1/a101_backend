@@ -28,5 +28,21 @@ namespace a101_backend.Services.UserService
         {
             return await Task.Run(() => MyDb.db.User.ToList());
         }
+
+        public async Task<object> UpdateUser(User user)
+        {
+            try
+            {
+                var _update = MyDb.db.User.FirstOrDefault(el => el.UserID == user.UserID);
+                _update.UserName = user.UserName;
+                MyDb.db.Update(_update);
+                MyDb.db.SaveChanges();
+                return await Task.Run(() => (object)new { status = true });
+            }
+            catch (Exception)
+            {
+                return await Task.Run(() => (object) new { status=false });
+            }
+        }
     }
 }

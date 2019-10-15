@@ -11,5 +11,6 @@ namespace a101_backend.Services.UserService
         Task<object> AddNewUser(User user);
         Task<List<User>> GetUsers();
         Task<User> DeleteUser(int userID);
+        Task<object> UpdateUser(User user);
     }
 }

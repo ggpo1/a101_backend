@@ -44,5 +44,11 @@ namespace a101_backend.Controllers
         {
             return await service.DeletePartner(partnerInfoID);
         }
+
+        [HttpPatch]
+        public async Task<object> UpdatePartnerInfo([FromBody] PartnerInfo partnerInfo)
+        {
+            return await service.UpdatePartnerInfo(partnerInfo);
+        }
     }
 }
