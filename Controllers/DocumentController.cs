@@ -74,18 +74,27 @@ namespace a101_backend.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public async Task<object> AddNewDocument([FromForm]IFormFile file)
         {
-
-            if (file == null || file.Length == 0)
-                return Content("file not selected");
-
-            var path = @"C:/a101_docs/";
-
-            using (var stream = new FileStream(path + file.FileName, FileMode.Create))
+            try
             {
-                await file.CopyToAsync(stream);
-            }
+                if (file == null || file.Length == 0)
+                    return Content("file not selected");
 
-            return await Task.Run(() => Ok());
+                var path = @"C:/a101_docs/";
+                DateTime thisDay = DateTime.Today;
+                string _filename = thisDay.Day + "_" + thisDay.Month + "_" + thisDay.Year;
+                _filename += "_" + file.FileName.Replace(" ", "");
+
+                using (var stream = new FileStream(path + _filename, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                return await Task.Run(() => Ok());
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return await Task.Run(() => Ok());
+            }
         }
 
         [HttpGet]

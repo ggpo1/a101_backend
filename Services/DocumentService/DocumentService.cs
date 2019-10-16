@@ -59,6 +59,11 @@ namespace a101_backend.Services.DocumentService
 
         public async Task<Document> SaveDocInfo(Document document)
         {
+            DateTime thisDay = DateTime.Today;
+            string _filename = thisDay.Day + "_" + thisDay.Month + "_" + thisDay.Year;
+            _filename += "_" + document.DocumentName.Replace(" ", "");
+            
+            document.DocumentName = _filename;
             var savedDoc = MyDb.db.Document.Add(document);
             MyDb.db.SaveChanges();
             return await Task.Run(() => savedDoc.Entity);
