@@ -2,6 +2,7 @@
 using a101_backend.Models.DTO;
 using a101_backend.Services.PartnerInfoService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace a101_backend.Controllers
     public class PartnerInfoController
     {
         IPartnerInfoService service;
+        readonly ILogger<PartnerInfoController> log;
 
-        public PartnerInfoController(IPartnerInfoService service)
+        public PartnerInfoController(IPartnerInfoService service, ILogger<PartnerInfoController> log)
         {
             this.service = service;
+            this.log = log;
         }
 
         [HttpGet]
@@ -30,6 +33,7 @@ namespace a101_backend.Controllers
         [Route("GetPartners")]
         public async Task<List<GetAllPartnersDTO>> GetPartners()
         {
+            log.LogInformation("GET Partners");
             return await service.GetPartners();
         }
 

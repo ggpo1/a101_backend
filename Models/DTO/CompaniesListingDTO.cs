@@ -11,5 +11,6 @@ namespace a101_backend.Models.DTO
         public Company Company { get; set; }
         public PartnerInfo PartnerInfo { get; set; }
         public City City { get; set; }
+        public CompanyStatus Status { get; set; }
     }
 }

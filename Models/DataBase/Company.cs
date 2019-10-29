@@ -9,6 +9,7 @@ namespace a101_backend.Models.DataBase
         public string ContactPersonFullName { get; set; }
         public string ContactPersonPhoneNumber { get; set; }
         public string ContactPersonCompanyState { get; set; }
+        public int CompanyStatusID { get; set; }
         public CompanyStatus Status { get; set; }
         public int CityID { get; set; }
         public virtual City City { get; set; }

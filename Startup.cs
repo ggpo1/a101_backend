@@ -17,6 +17,8 @@ using a101_backend.Services.PartnerInfoService;
 using a101_backend.Services.UserService;
 using a101_backend.Services.CityService;
 using a101_backend.Services.DocumentService;
+using a101_backend.Services.DealService;
+using a101_backend.Services.CompanyStatusService;
 
 namespace a101_backend
 {
@@ -75,13 +77,18 @@ namespace a101_backend
             services.AddScoped<ICityService, CityService>();
             // Резервирование сервиса документов
             services.AddScoped<IDocumentService, DocumentService>();
+            // Резервирование сервиса для интеграции amoCrm
+            services.AddScoped<IDealService, DealService>();
+            // Резервирование сервиса для статусов сделки
+            services.AddScoped<ICompanyStatusService, CompanyStatusService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile("Logs/myapp-{Date}.txt");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

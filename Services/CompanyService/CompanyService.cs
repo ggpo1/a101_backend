@@ -29,7 +29,8 @@ namespace a101_backend.Services.CompanyService
                     {
                         Company = comp,
                         PartnerInfo = MyDb.db.PartnerInfo.FirstOrDefault(el => el.PartnerInfoID == comp.PartnerInfoID),
-                        City = MyDb.db.City.FirstOrDefault(el => el.CityID == comp.CityID)
+                        City = MyDb.db.City.FirstOrDefault(el => el.CityID == comp.CityID),
+                        Status = MyDb.db.CompanyStatuse.FirstOrDefault(el => el.CompanyStatusID == comp.CompanyStatusID)
                     }
                 );
             }

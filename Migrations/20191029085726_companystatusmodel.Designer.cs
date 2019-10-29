@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using a101_backend.Models;
 
 namespace a101_backend.Migrations
 {
     [DbContext(typeof(Models.AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20191029085726_companystatusmodel")]
+    partial class companystatusmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +44,6 @@ namespace a101_backend.Migrations
 
                     b.Property<string>("CompanyName");
 
-                    b.Property<int>("CompanyStatusID");
-
                     b.Property<string>("ContactPersonCompanyState");
 
                     b.Property<string>("ContactPersonFullName");
@@ -52,13 +52,15 @@ namespace a101_backend.Migrations
 
                     b.Property<int>("PartnerInfoID");
 
+                    b.Property<int?>("StatusCompanyStatusID");
+
                     b.HasKey("CompanyID");
 
                     b.HasIndex("CityID");
 
-                    b.HasIndex("CompanyStatusID");
-
                     b.HasIndex("PartnerInfoID");
+
+                    b.HasIndex("StatusCompanyStatusID");
 
                     b.ToTable("Company");
                 });
@@ -148,15 +150,14 @@ namespace a101_backend.Migrations
                         .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("a101_backend.Models.DataBase.CompanyStatus", "Status")
-                        .WithMany()
-                        .HasForeignKey("CompanyStatusID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("a101_backend.Models.DataBase.PartnerInfo", "PartnerInfo")
                         .WithMany()
                         .HasForeignKey("PartnerInfoID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("a101_backend.Models.DataBase.CompanyStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusCompanyStatusID");
                 });
 
             modelBuilder.Entity("a101_backend.Models.DataBase.PartnerInfo", b =>
